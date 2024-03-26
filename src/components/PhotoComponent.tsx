@@ -1,10 +1,21 @@
 import {View, Text, StyleSheet, Pressable} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
+import ImagePicker from 'react-native-image-crop-picker';
 
 const PhotoComponent = () => {
   const navigation = useNavigation();
+
+  const handleSelectPhoto = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(image => {
+      console.log(image);
+    });
+  };
 
   const handleCameraClick = () => {
     navigation.navigate('CameraScreen');
@@ -15,6 +26,7 @@ const PhotoComponent = () => {
       <Text style={styles.title}>Click on the button that suits you!!!</Text>
       <View style={styles.buttonContainer}>
         <Pressable
+          onPress={handleSelectPhoto}
           style={({pressed}) =>
             pressed ? styles.pressed : styles.pressbaleContainer
           }>

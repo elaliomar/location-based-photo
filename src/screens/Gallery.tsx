@@ -6,6 +6,7 @@ import ImageItem from '../components/ImageItem';
 
 const PAGE_SIZE = 5;
 let currentPage = 1;
+let allDataLoaded = false;
 
 const Gallery = () => {
   const isFocused = useIsFocused();
@@ -14,13 +15,19 @@ const Gallery = () => {
   const [refreshing, setRefreshing] = useState(false);
 
   const fetchData = useCallback(async () => {
+    if (allDataLoaded) return;
     setLoading(true);
     try {
       const response = await axios.get(
         `https://660039ecdf565f1a6145fa41.mockapi.io/images?page=${currentPage}&limit=${PAGE_SIZE}`,
       );
       const newData = response.data;
-      setServerData(prevData => [...prevData, ...newData]);
+      if (newData.length === 0) {
+        allDataLoaded = true;
+      } else {
+        setServerData(prevData => [...prevData, ...newData]);
+        currentPage++;
+      }
     } catch (error) {
       console.error('Error fetching data: ', error);
     } finally {
@@ -31,25 +38,26 @@ const Gallery = () => {
   useEffect(() => {
     if (isFocused) {
       currentPage = 1;
+      allDataLoaded = false;
       setServerData([]);
       fetchData();
     }
   }, [isFocused, fetchData]);
 
   const handleLoadMore = () => {
-    currentPage++;
     fetchData();
   };
 
   const handleRefresh = () => {
     setRefreshing(true);
     currentPage = 1;
+    allDataLoaded = false;
     setServerData([]);
     fetchData();
     setRefreshing(false);
   };
 
-  const renderImageItem = ({item}: {item: ImageItem}) => {
+  const renderImageItem = ({item}) => {
     return (
       <ImageItem
         id={item.id}
@@ -72,7 +80,7 @@ const Gallery = () => {
           refreshing={refreshing}
           onRefresh={handleRefresh}
           onEndReached={handleLoadMore}
-          onEndReachedThreshold={1}
+          onEndReachedThreshold={0.5}
           ListFooterComponent={
             loading ? <ActivityIndicator color={'#0331fc'} /> : null
           }
