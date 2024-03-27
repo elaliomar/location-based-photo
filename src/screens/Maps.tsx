@@ -1,33 +1,19 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {useRoute, useNavigation} from '@react-navigation/native';
-import axios from 'axios';
-import MapView, {Callout, Marker} from 'react-native-maps';
+import React from 'react';
+import Map from '../components/molecules/Map';
 
 const Maps = () => {
-  const route = useRoute();
-  const id = route.params.id;
-  const latitude = route.params.latitude;
-  const longitude = route.params.longitude;
-  const INITIAL_VALUES = {
-    latitude: latitude,
-    longitude: longitude,
-    latitudeDelta: 0.2,
-    longitudeDelta: 0.2,
-  };
   return (
-    <MapView style={StyleSheet.absoluteFill} initialRegion={INITIAL_VALUES}>
-      <Marker
-        coordinate={{
-          latitude: latitude,
-          longitude: longitude,
-        }}>
-        <Callout>
-          <Text>image of id {id}</Text>
-        </Callout>
-      </Marker>
-    </MapView>
+    <View style={styles.container}>
+      <Map />
+    </View>
   );
 };
 
 export default Maps;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

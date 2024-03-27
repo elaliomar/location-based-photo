@@ -1,6 +1,6 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
-import PhotoComponent from '../components/PhotoComponent';
+import PhotoComponent from '../components/atoms/PhotoComponent';
 
 const Photo = () => {
   return (

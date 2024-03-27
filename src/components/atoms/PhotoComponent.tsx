@@ -1,21 +1,10 @@
 import {View, Text, StyleSheet, Pressable} from 'react-native';
 import React, {useState} from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
-import ImagePicker from 'react-native-image-crop-picker';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const PhotoComponent = () => {
   const navigation = useNavigation();
-
-  const handleSelectPhoto = () => {
-    ImagePicker.openPicker({
-      width: 300,
-      height: 400,
-      cropping: true,
-    }).then(image => {
-      console.log(image);
-    });
-  };
 
   const handleCameraClick = () => {
     navigation.navigate('CameraScreen');
@@ -23,22 +12,15 @@ const PhotoComponent = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Click on the button that suits you!!!</Text>
+      <Text style={styles.title}>
+        Click on the button to take or select a photo!!!
+      </Text>
       <View style={styles.buttonContainer}>
-        <Pressable
-          onPress={handleSelectPhoto}
-          style={({pressed}) =>
-            pressed ? styles.pressed : styles.pressbaleContainer
-          }>
-          <Text style={styles.pressableText}>Phone Gallery</Text>
-          <Icon name="image" size={25} style={styles.icon} />
-        </Pressable>
         <Pressable
           style={({pressed}) =>
             pressed ? styles.pressed : styles.pressbaleContainer
           }
           onPress={handleCameraClick}>
-          <Text style={styles.pressableText}>Take Photo</Text>
           <Icon name="camera" size={25} style={styles.icon} />
         </Pressable>
       </View>
@@ -60,7 +42,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   pressbaleContainer: {

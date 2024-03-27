@@ -18,11 +18,13 @@ const ImageItem = ({
   url,
   latitude,
   longitude,
+  onDelete,
 }: {
   id: string;
   url: string;
   latitude: number;
   longitude: number;
+  onDelete: () => void;
 }) => {
   const navigation = useNavigation<any>();
 
@@ -47,10 +49,9 @@ const ImageItem = ({
         `https://660039ecdf565f1a6145fa41.mockapi.io/images/${id}`,
       );
       console.log('Image deleted successfully');
-      // You can perform additional actions after successful deletion if needed
+      onDelete();
     } catch (error) {
       console.error('Error deleting image:', error);
-      // Handle error
     }
   };
 
@@ -77,7 +78,7 @@ const ImageItem = ({
   return (
     <GestureHandlerRootView style={styles.container}>
       <Swipeable renderLeftActions={renderLeftActions}>
-        <Pressable onPress={handlePress} style={styles.imageContainer}>
+        <Pressable onLongPress={handlePress} style={styles.imageContainer}>
           <Image source={{uri: `file://${url}`}} style={styles.image} />
         </Pressable>
       </Swipeable>

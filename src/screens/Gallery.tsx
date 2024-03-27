@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, FlatList} from 'react-native';
 import axios from 'axios';
 import {useIsFocused} from '@react-navigation/native';
-import ImageItem from '../components/ImageItem';
+import ImageItem from '../components/molecules/ImageItem';
 
 const PAGE_SIZE = 5;
 let currentPage = 1;
@@ -48,6 +48,10 @@ const Gallery = () => {
     fetchData();
   };
 
+  const handleDelete = (id: string) => {
+    setServerData(prevData => prevData.filter(item => item.id !== id));
+  };
+
   const handleRefresh = () => {
     setRefreshing(true);
     currentPage = 1;
@@ -64,6 +68,7 @@ const Gallery = () => {
         url={item.url}
         latitude={item.location.latitude}
         longitude={item.location.longitude}
+        onDelete={() => handleDelete(item.id)}
       />
     );
   };

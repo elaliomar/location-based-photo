@@ -19,13 +19,14 @@ import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 import Geolocation from '@react-native-community/geolocation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ImagePicker from 'react-native-image-crop-picker';
 
 const CameraScreen = () => {
   const navigation = useNavigation();
   const {hasPermission, requestPermission} = useCameraPermission();
   const device = useCameraDevice('back');
   const camera = useRef<Camera>(null);
-  const [photo, setPhoto] = useState<PhotoFile>();
+  const [photo, setPhoto] = useState<any>();
   const [isActive, setIsActive] = useState(true);
   const [location, setLocation] = useState({});
   useEffect(() => {
@@ -75,6 +76,17 @@ const CameraScreen = () => {
   const onTakePicturePressed = async () => {
     const photo = await camera.current?.takePhoto();
     setPhoto(photo);
+  };
+
+  const onSelectPicturePressed = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(image => {
+      setPhoto(image);
+      console.log('selected');
+    });
   };
 
   const savePhotoToStorage = async (photo: PhotoFile) => {
@@ -137,23 +149,27 @@ const CameraScreen = () => {
           <Icon
             name="close"
             size={25}
-            color={'white'}
+            color={'#0331fc'}
             style={{position: 'absolute', top: 50, left: 30}}
             onPress={() => setPhoto(undefined)}
           />
           <Icon
             name="check"
             size={25}
-            color={'white'}
+            color={'#0331fc'}
             style={{position: 'absolute', top: 50, right: 30}}
             onPress={sendPhoto}
           />
         </>
       ) : (
         <>
-          <Pressable
-            onPress={onTakePicturePressed}
-            style={styles.pressableButton}
+          <Pressable onPress={onTakePicturePressed} style={styles.takeButton} />
+          <Icon
+            name="image"
+            size={25}
+            color={'white'}
+            style={{position: 'absolute', bottom: 70, left: 30}}
+            onPress={onSelectPicturePressed}
           />
         </>
       )}
@@ -164,7 +180,7 @@ const CameraScreen = () => {
 export default CameraScreen;
 
 const styles = StyleSheet.create({
-  pressableButton: {
+  takeButton: {
     position: 'absolute',
     alignSelf: 'center',
     bottom: 50,
