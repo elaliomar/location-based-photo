@@ -1,6 +1,6 @@
+import {useNavigation} from '@react-navigation/native';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
 import React, {useState} from 'react';
-import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const PhotoComponent = () => {
@@ -17,6 +17,7 @@ const PhotoComponent = () => {
       </Text>
       <View style={styles.buttonContainer}>
         <Pressable
+          testID="camera-button"
           style={({pressed}) =>
             pressed ? styles.pressed : styles.pressbaleContainer
           }

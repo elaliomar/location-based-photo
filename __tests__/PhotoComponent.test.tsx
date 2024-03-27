@@ -1,3 +1,13 @@
+// Import the necessary modules for mocking
+jest.mock('react-native-vector-icons/FontAwesome', () => 'Icon');
+
+// Mock the useNavigation hook
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: () => ({
+    navigate: jest.fn(),
+  }),
+}));
+
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
 import PhotoComponent from '../src/components/atoms/PhotoComponent';
@@ -26,6 +36,6 @@ describe('PhotoComponent', () => {
     const buttonElement = getByTestId('camera-button');
 
     fireEvent.press(buttonElement);
-    expect(mockNavigate).toHaveBeenCalledWith('CameraScreen');
+    expect(mockNavigate).toHaveBeenCalledWith('CameraScreen'); // Ensure the correct argument
   });
 });
