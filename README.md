@@ -1,79 +1,53 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Location-Based Photo Gallery App Using React Native CLI & MockAPI
 
-# Getting Started
+## Overview
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+Welcome to the Location-Based Photo Gallery App! This mobile application offers users a seamless solution for managing and organizing their photos based on location. Whether capturing spontaneous moments or selecting cherished photos from your device gallery, and then the user has the ability to swipe the image in order to delete it.
+It is Built using React Native for the frontend, ensuring a smooth and responsive user experience. Additionally, the backend is powered by mockAPI.
 
-## Step 1: Start the Metro Server
+## Application Structure
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+- Welcome screen: This screen displays for 3 seconds upon launching the app and then automatically redirects users to the Photo screen.
+- Camera screen: Users can capture photos using the device camera or select images from their gallery. These photos are then uploaded to the backend API.
+- Gallery screen: Here, users can view the photos they have taken or selected. The gallery organizes photos based on their location and allow him to delete an image if needed
+- Maps screen: The Maps screen features a map with markers indicating the locations associated with each photo in the gallery. This functionality allows users to visualize where their photos were taken.
 
-To start Metro, run the following command from the _root_ of your React Native project:
 
-```bash
-# using npm
-npm start
+### Keys Topics
+- React Native built-in components:
+   - Text
+   - Image
+   - View
+   - Switch
+- React navigation:
+   - Passing params between screens
+   - Navigate between screens
+   - Native stack
+   - Bottoms Tabs
+- Styling:
+   - StyleSheet API
+- External libraries:
+   - React native vector for icons
+   - react native geolocation for getting the location of a device
+   - react native lottie for animated API
+   - Reanimated and gesture handler for swipping the image
+   - axios for dealing with HTTP requests
 
-# OR using Yarn
-yarn start
-```
+ ## Usage
 
-## Step 2: Start your Application
+To run the project, follow these steps:
+- Clone the repository.
+- Navigate to the project directory.
+- Install dependencies using npm install or yarn install.
+- Run the application using npm start or yarn start
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+After starting the Metro bundler, which is responsible for bundling your JavaScript code and assets, you can press 'a' to run the app on an Android device or emulator, and 'i' to run it on an iOS device or simulator. 
 
-### For Android
+## Contributing
 
-```bash
-# using npm
-npm run android
+Contributions are welcome! If you find any bugs or have suggestions for improvement, feel free to open an issue or submit a pull request.
 
-# OR using Yarn
-yarn android
-```
+## License
 
-### For iOS
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
